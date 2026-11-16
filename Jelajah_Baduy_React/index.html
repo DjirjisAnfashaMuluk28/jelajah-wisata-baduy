@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Jelajah Baduy | Portal Informasi Wisata Lebak</title>
+  <meta name="description" content="Portal informasi destinasi, budaya, panduan, dan peta wisata Baduy di Kabupaten Lebak, Banten.">
+  <meta name="theme-color" content="#294936">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+  <link rel="stylesheet" href="style.css?v=20261027">
+  <link rel="stylesheet" href="react-motion.css?v=20261027">
+</head>
+<body>
+<a class="skip" href="#destinasi">Lewati ke konten</a>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="#beranda" class="brand" aria-label="Jelajah Baduy, beranda">
+      <span class="brand-mark" aria-hidden="true">JB</span>
+      <span class="brand-copy"><strong>Jelajah Baduy</strong><small>Wisata Alam &amp; Budaya Lebak</small></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="menu">Menu</button>
+    <nav id="menu" aria-label="Navigasi utama">
+      <a href="#beranda">Beranda</a>
+      <a href="#destinasi">Destinasi</a>
+      <a href="#peta">Peta Wisata</a>
+      <a href="#informasi">Informasi</a>
+      <a href="#panduan">Panduan</a>
+      <a href="#tentang">Tentang</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="beranda">
+    <div class="hero-shade"></div>
+    <div class="wrap hero-in">
+      <div class="hero-copy">
+        <p class="hero-label"><span class="live-dot"></span> GERBANG INFORMASI WISATA BADUY</p>
+        <h1>Selamat Datang di <span>Jelajah Baduy</span></h1>
+        <p class="hero-description">Destinasi dan peta untuk kunjungan ke kawasan Baduy, Kabupaten Lebak, Banten, lengkap dengan aturan adat yang perlu Anda ikuti.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#destinasi">Jelajahi Destinasi <span aria-hidden="true">→</span></a>
+          <a class="btn btn-glass" href="#peta">Lihat Peta Wisata</a>
+        </div>
+      </div>
+      <div class="hero-caption"><span class="caption-line"></span><span>Jaga alamnya, hormati adatnya</span></div>
+    </div>
+  </section>
+
+  <section class="portal-shortcuts" aria-label="Akses cepat">
+    <div class="wrap shortcut-grid">
+      <a class="shortcut" href="#destinasi"><span class="shortcut-icon">⌖</span><span><strong>Destinasi Wisata</strong><small>Jelajahi kawasan Baduy</small></span><span class="shortcut-arrow">↗</span></a>
+      <a class="shortcut" href="#peta"><span class="shortcut-icon">◎</span><span><strong>Peta Wisata</strong><small>Temukan lokasi tujuan</small></span><span class="shortcut-arrow">↗</span></a>
+      <a class="shortcut" href="#informasi"><span class="shortcut-icon">▤</span><span><strong>Informasi Wisata</strong><small>Alam dan budaya lokal</small></span><span class="shortcut-arrow">↗</span></a>
+      <a class="shortcut" href="#panduan"><span class="shortcut-icon">✓</span><span><strong>Panduan Kunjungan</strong><small>Persiapan dan etika adat</small></span><span class="shortcut-arrow">↗</span></a>
+    </div>
+  </section>
+
+  <section class="section" id="destinasi">
+    <div class="wrap">
+      <div class="section-heading">
+        <div><p class="section-eyebrow">JELAJAHI LEBAK</p><h2>Destinasi Pilihan</h2><p class="lead">Kawasan adat, kampung, dan jalur alam di Lebak. Baca ringkasannya sebelum menyusun rencana.</p></div>
+        <a class="text-link" href="#peta">Lihat peta wisata <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="grid" id="cards"></div>
+      <noscript><p>Aktifkan JavaScript untuk melihat daftar destinasi dan peta wisata.</p></noscript>
+    </div>
+  </section>
+
+  <section class="section alt" id="peta">
+    <div class="wrap">
+      <div class="section-heading">
+        <div><p class="section-eyebrow">ORIENTASI PERJALANAN</p><h2>Peta Wisata Baduy</h2><p class="lead">Pilih destinasi atau klik marker untuk melihat lokasi. Titik Baduy Luar, Kampung Marengo, dan Terminal Ciboleger mengikuti koordinat pin Google Maps.</p></div>
+      </div>
+      <div class="map-layout">
+        <ul class="map-list" id="mapList" aria-label="Daftar destinasi wisata"></ul>
+        <div class="map-box">
+          <div id="map" aria-label="Peta lokasi wisata Baduy di Kanekes, Lebak"></div>
+          <div class="map-bar">
+            <p id="mapNote" role="status" aria-live="polite" aria-atomic="true">Pilih destinasi untuk melihat informasi lokasi. Titik yang tersedia mengikuti koordinat pin Google Maps.</p>
+            <div class="btns">
+              <button class="btn btn-small" id="locateBtn" type="button">Lokasi Saya</button>
+              <a class="btn btn-small" id="osmLink" target="_blank" rel="noopener noreferrer" href="https://www.openstreetmap.org/?mlat=-6.5958483&amp;mlon=106.2256021#map=16/-6.5958483/106.2256021">OpenStreetMap</a>
+              <a class="btn btn-small" id="gmapsLink" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&amp;query=-6.5958483%2C106.2256021">Google Maps</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="informasi">
+    <div class="wrap">
+      <div class="section-heading">
+        <div><p class="section-eyebrow">BACAAN SINGKAT</p><h2>Informasi Wisata</h2><p class="lead">Tiga bacaan singkat sebelum Anda berkunjung.</p></div>
+      </div>
+      <div class="news-grid">
+        <article class="news-card news-feature">
+          <div class="news-image" style="background-image:url('img/budaya.jpg')"></div>
+          <div class="news-body"><span class="news-tag">BUDAYA LOKAL</span><h3>Mengenal Kerajinan Tenun Baduy</h3><p>Kerajinan tradisional adalah bagian dari keseharian warga. Beli langsung dari pengrajin bila ada, dan ikuti aturan setempat.</p><a href="#panduan" class="text-link">Baca panduan <span aria-hidden="true">→</span></a></div>
+        </article>
+        <article class="news-card">
+          <div class="news-image" style="background-image:url('img/marengo.jpg')"></div>
+          <div class="news-body"><span class="news-tag">KAWASAN ADAT</span><h3>Etika Saat Mengunjungi Kampung</h3><p>Minta izin sebelum memotret warga. Ikuti arahan pemandu dan ketentuan adat.</p><a href="#panduan" class="text-link">Lihat etika kunjungan <span aria-hidden="true">→</span></a></div>
+        </article>
+        <article class="news-card">
+          <div class="news-image" style="background-image:url('img/sungai.jpg')"></div>
+          <div class="news-body"><span class="news-tag">ALAM LEBAK</span><h3>Menjaga Jalur dan Sungai</h3><p>Bawa pulang sampah Anda. Jangan merusak tanaman, dan jaga sungai tetap bersih.</p><a href="#panduan" class="text-link">Baca panduan alam <span aria-hidden="true">→</span></a></div>
+        </article>
+      </div>
+      <p class="notice">Halaman ini memuat panduan umum dan tidak mewakili pengumuman resmi. Tanyakan akses, lokasi, dan aturan terbaru kepada pihak setempat.</p>
+    </div>
+  </section>
+
+  <section class="section alt" id="panduan">
+    <div class="wrap">
+      <div class="section-heading"><div><p class="section-eyebrow">SEBELUM BERANGKAT</p><h2>Panduan Perjalanan</h2><p class="lead">Siapkan empat hal ini sebelum Anda berangkat.</p></div></div>
+      <div class="guide">
+        <article><span class="guide-number">01</span><h3>Persiapan Perjalanan</h3><ul><li>Periksa aturan kunjungan terbaru sebelum berangkat.</li><li>Hubungi pemandu lokal jika diperlukan.</li><li>Siapkan kondisi fisik untuk berjalan kaki.</li><li>Periksa cuaca dan kondisi jalur.</li></ul></article>
+        <article><span class="guide-number">02</span><h3>Perlengkapan Wisata</h3><ul><li>Gunakan alas kaki yang nyaman dan tidak licin.</li><li>Bawa pakaian ganti dan jas hujan.</li><li>Siapkan air minum dan obat pribadi.</li><li>Bawa kantong untuk sampah pribadi.</li></ul></article>
+        <article><span class="guide-number">03</span><h3>Hormati Budaya Lokal</h3><ul><li>Ikuti arahan warga dan pemandu.</li><li>Mintalah izin sebelum memotret warga.</li><li>Kenakan pakaian yang sopan.</li><li>Patuhi pembatasan kawasan adat.</li></ul></article>
+        <article><span class="guide-number">04</span><h3>Jaga Kelestarian Alam</h3><ul><li>Bawa kembali semua sampah.</li><li>Jangan merusak tanaman atau fasilitas.</li><li>Hindari penggunaan sabun di sungai.</li><li>Tetap di jalur yang diperbolehkan.</li></ul></article>
+        <article class="wide"><h3>Akses dan Transportasi</h3><p>Rute, waktu tempuh, dan transportasi bisa berubah. Cek aplikasi peta, lalu tanyakan akses terbaru kepada pemandu lokal sebelum berangkat.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tentang">
+    <div class="wrap about">
+      <div><p class="section-eyebrow">TENTANG PORTAL</p><h2>Mengenal Jelajah Baduy</h2><p>Jelajah Baduy adalah portal informasi wisata alam dan budaya di Kabupaten Lebak, Banten. Mahasiswa Universitas Pamulang membuatnya sebagai proyek mahasiswa.</p><p>Portal ini membantu pengunjung mengenal destinasi lokal dan menghormati masyarakat adat serta lingkungan.</p><p><strong>Catatan:</strong> Pemerintah dan pengelola wisata tidak menjalankan situs ini.</p></div>
+      <div class="about-panel"><h3>Wisata Alam</h3><p>Kawasan Lebak punya perbukitan, sungai, hutan, dan suasana desa.</p><h3>Budaya dan Tradisi</h3><p>Kenali kerajinan lokal dan kehidupan warga, dan ikuti tata cara serta batasan adat.</p><h3>Pengembang</h3><p>Proyek mahasiswa Universitas Pamulang yang berfokus pada informasi wisata alam dan budaya Lebak.</p></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap foot-in">
+    <div><a href="#beranda" class="footer-brand">Jelajah Baduy</a><p>Portal Informasi Wisata Alam &amp; Budaya</p><p>Kabupaten Lebak, Banten</p></div>
+    <nav aria-label="Navigasi footer"><p><strong>Jelajahi</strong></p><a href="#destinasi">Destinasi Wisata</a><a href="#peta">Peta Wisata</a><a href="#informasi">Informasi</a><a href="#panduan">Panduan Perjalanan</a></nav>
+    <div><p><strong>Referensi</strong></p><a href="https://lebakkab.go.id" target="_blank" rel="noopener noreferrer">Portal Pemerintah Kabupaten Lebak</a><br><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">Data peta OpenStreetMap</a><p class="footer-disclaimer">Situs informasi independen tanpa afiliasi pemerintah.</p></div>
+  </div>
+  <p class="copy wrap">© 2026 Jelajah Baduy · Proyek mahasiswa Universitas Pamulang</p>
+</footer>
+
+<dialog id="detail" aria-labelledby="dTitle"><h3 id="dTitle"></h3><p id="dType" class="badge"></p><p id="dText"></p><button class="btn btn-primary" id="dClose" type="button">Tutup</button></dialog>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script src="script.js?v=20261110-map"></script>
+<!-- React 18: efek tambahan, tanpa mengganti fitur website lama. -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script src="react-runtime.js?v=20261027"></script>
+<div id="react-motion-root" aria-label="Kontrol tampilan" ></div>
+</body>
+</html>
